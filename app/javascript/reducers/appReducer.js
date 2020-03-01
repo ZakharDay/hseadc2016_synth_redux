@@ -1,4 +1,4 @@
-import * as ActionTypes from '../constants/appConstants'
+import { merge } from 'lodash'
 
 export const initialState = {
   counter: {
@@ -12,12 +12,12 @@ export default function appReducer(state = initialState, action) {
       console.log('+')
       state.counter.currentCounter = state.counter.currentCounter + 1
       console.log(state)
-      return state
+      return merge({}, state)
     case 'DECREMENT':
       console.log('-')
       state.counter.currentCounter = state.counter.currentCounter - 1
       console.log(state)
-      return state
+      return merge({}, state)
     default:
       return state
   }
