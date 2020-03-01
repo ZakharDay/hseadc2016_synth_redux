@@ -1,6 +1,6 @@
 import { merge } from 'lodash'
 
-export const initialState = {
+const initialState = {
   counter: {
     currentCounter: 0
   }
