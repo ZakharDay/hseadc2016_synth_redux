@@ -1,1 +1,2 @@
-export const APP_LOADED = 'APP_LOADED'
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'

@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as appActionCreators from '../actions/appActionCreators'
 
-export default class App extends Component {
-  constructor(props, context) {
-    super(props, context)
-  }
-
-  render() {
-    return <div>Yo</div>
-  }
+function select(state) {
+  return { appStore: state }
 }
+
+const App = props => {
+  console.log(props)
+  const { dispatch, appStore } = props
+  const actions = bindActionCreators(appActionCreators, dispatch)
+
+  return (
+    <div>
+      <div onClick={actions.decrement}>-</div>
+      <div>{appStore}</div>
+      <div onClick={actions.increment}>+</div>
+    </div>
+  )
+}
+
+export default connect(select)(App)

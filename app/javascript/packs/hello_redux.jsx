@@ -6,11 +6,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
-import configureStore from '../store/configureStore'
+import appStore from '../store/appStore'
 
 import App from '../containers/App'
 
-const store = configureStore()
+const store = appStore()
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
