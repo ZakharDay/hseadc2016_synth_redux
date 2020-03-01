@@ -1,6 +1,4 @@
-import * as ActionTypes from '../constants/appConstants'
-
-export const initialState = {
+const initialState = {
   counter: {
     currentCounter: 0
   }
