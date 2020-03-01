@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as appActionCreators from '../actions/appActionCreators'
 
 function select(state) {
+  console.log(state)
   return { appStore: state }
 }
 
@@ -15,7 +16,7 @@ const App = props => {
   return (
     <div>
       <div onClick={actions.decrement}>-</div>
-      <div>{appStore}</div>
+      <div>{appStore.counter.currentCounter}</div>
       <div onClick={actions.increment}>+</div>
     </div>
   )
