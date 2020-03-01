@@ -1,6 +1,4 @@
-import * as ActionTypes from '../constants/appConstants'
-
-export const initialState = 0
+const initialState = 0
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
