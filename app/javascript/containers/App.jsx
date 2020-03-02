@@ -17,45 +17,30 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, getState } = this.props
-    // const actions = bindActionCreators(appActionCreators, dispatch)
-    const test = appActionCreators.setBpm(90)
-    console.log(test(dispatch))
+    const { dispatch } = this.props
+    const actions = bindActionCreators(appActionCreators, dispatch)
+    actions.setBpm(90)
   }
 
   toggleNote() {
     const { appStore } = this.props
     const synth = appStore.synths[0]
-    synth.triggerAttackRelease('C4', '1n')
+    synth.instrument.triggerAttackRelease('C4', '1n')
   }
 
   render() {
     const { dispatch, appStore } = this.props
-    console.log(this.props)
-    // const actions = bindActionCreators(appActionCreators, dispatch)
-
-    const startTransport = appActionCreators.startTransport()
-    const addSynth = appActionCreators.addSynth()
-    console.log(this.props)
+    const actions = bindActionCreators(appActionCreators, dispatch)
 
     let synthElements = []
 
     appStore.synths.map((synth, i) => {
       synthElements.push(
         <ToneSynth
-          synth="synth"
+          id={synth.id}
           instrument={synth.instrument}
-          changeSynthValue={(name, property, value) => {
-            // const changeSynthValue = appActionCreators.changeSynthValue(
-            //   name,
-            //   property,
-            //   value
-            // )
-            // changeSynthValue(dispatch)
-            appActionCreators.changeSynthValue(name, property, value)(
-              dispatch,
-              appStore
-            )
+          changeSynthValue={(id, property, value) => {
+            actions.changeSynthValue(id, property, value)
           }}
           key={i}
         />
@@ -64,8 +49,8 @@ class App extends Component {
 
     return (
       <div>
-        <div onClick={() => startTransport(dispatch)}>Start</div>
-        <div onClick={() => addSynth(dispatch)}>Add Synth</div>
+        <div onClick={() => actions.startTransport()}>Start</div>
+        <div onClick={() => actions.addSynth()}>Add Synth</div>
         {synthElements}
         <div onClick={this.toggleNote}>Beep</div>
       </div>

@@ -58,11 +58,9 @@ export default class Slider extends React.Component {
   }
 
   handleMouseUp() {
-    const { name, handleMouseUp } = this.props
+    const { handleMouseUp } = this.props
 
     if (this.state.mouseDown) {
-      // handleMouseUp(name)
-
       this.setState({
         mouseDown: false
       })
@@ -79,13 +77,13 @@ export default class Slider extends React.Component {
 
   moveThumb(screenX) {
     const { x, width } = this.slideArea.current.getBoundingClientRect()
-    const { name, property, min, max, handleValueChange } = this.props
+    const { id, property, min, max, handleValueChange } = this.props
     const areaRight = this.calculateRight(x, width)
     const thumbLeft = screenX - x
 
     if (thumbLeft >= 0 && screenX <= areaRight) {
       const value = this.calculateValue(width, thumbLeft)
-      handleValueChange(name, property, value)
+      handleValueChange(id, property, value)
 
       this.setState({
         thumbLeft

@@ -14,13 +14,13 @@ export default class ToneSynth extends React.Component {
     _.bindAll(this, 'handleValueChange')
   }
 
-  handleValueChange(name, property, value) {
+  handleValueChange(id, property, value) {
     const { changeSynthValue } = this.props
-    changeSynthValue(name, property, value)
+    changeSynthValue(id, property, value)
   }
 
   render() {
-    const { text, synth, instrument, on, togglePlay } = this.props
+    const { text, synth, id, instrument, on, togglePlay } = this.props
     const { attack, decay, sustain, release } = instrument.envelope
 
     return (
@@ -31,7 +31,7 @@ export default class ToneSynth extends React.Component {
           <div className="controlsRow">
             <h2>Attack</h2>
             <Slider
-              name={synth}
+              id={id}
               property="envelope.attack"
               min="0"
               max="1"
@@ -41,7 +41,7 @@ export default class ToneSynth extends React.Component {
 
             <h2>Decay</h2>
             <Slider
-              name={synth}
+              id={id}
               property="envelope.decay"
               min="0"
               max="1"
@@ -51,7 +51,7 @@ export default class ToneSynth extends React.Component {
 
             <h2>Sustain</h2>
             <Slider
-              name={synth}
+              id={id}
               property="envelope.sustain"
               min="0"
               max="1"
@@ -61,7 +61,7 @@ export default class ToneSynth extends React.Component {
 
             <h2>Release</h2>
             <Slider
-              name={synth}
+              id={id}
               property="envelope.release"
               min="0"
               max="1"
