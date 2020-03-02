@@ -17,10 +17,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, appStore } = this.props
-    const actions = bindActionCreators(appActionCreators, dispatch)
-    dispatch(actions.setBpm(90))
-    dispatch(actions.addSynth('ToneSynth', 'synth'))
+    const { dispatch, getState } = this.props
+    // const actions = bindActionCreators(appActionCreators, dispatch)
+    const test = appActionCreators.setBpm(90)
+    console.log(test(dispatch))
   }
 
   toggleNote() {
@@ -31,8 +31,12 @@ class App extends Component {
 
   render() {
     const { dispatch, appStore } = this.props
-    const actions = bindActionCreators(appActionCreators, dispatch)
-    console.log(appStore)
+    console.log(this.props)
+    // const actions = bindActionCreators(appActionCreators, dispatch)
+
+    const startTransport = appActionCreators.startTransport()
+    const addSynth = appActionCreators.addSynth()
+    console.log(this.props)
 
     let synthElements = []
 
@@ -41,7 +45,18 @@ class App extends Component {
         <ToneSynth
           synth="synth"
           instrument={synth.instrument}
-          actions={actions}
+          changeSynthValue={(name, property, value) => {
+            // const changeSynthValue = appActionCreators.changeSynthValue(
+            //   name,
+            //   property,
+            //   value
+            // )
+            // changeSynthValue(dispatch)
+            appActionCreators.changeSynthValue(name, property, value)(
+              dispatch,
+              appStore
+            )
+          }}
           key={i}
         />
       )
@@ -49,14 +64,20 @@ class App extends Component {
 
     return (
       <div>
-        <div onClick={() => dispatch(actions.transportStart())}>Start</div>
-        <div onClick={() => dispatch(actions.addSynth('ToneSynth', 'sunth2'))}>
-          Add Synth
-        </div>
+        <div onClick={() => startTransport(dispatch)}>Start</div>
+        <div onClick={() => addSynth(dispatch)}>Add Synth</div>
         {synthElements}
         <div onClick={this.toggleNote}>Beep</div>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  const { appStore } = state
+
+  return {
+    appStore: appStore
   }
 }
 
