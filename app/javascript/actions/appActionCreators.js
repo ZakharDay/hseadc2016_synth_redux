@@ -1,4 +1,3 @@
-import appStore from '../store/appStore'
 import * as ActionTypes from '../constants/appConstants'
 
 export const setBpm = bpm => ({ type: ActionTypes.SET_BPM, value: bpm })

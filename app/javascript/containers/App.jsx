@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -6,20 +7,21 @@ import * as appActionCreators from '../actions/appActionCreators'
 
 import ToneSynth from '../components/synths/ToneSynth'
 
-function select(state) {
+const select = state => {
   return { appStore: state }
 }
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.toggleNote = this.toggleNote.bind(this)
+    _.bindAll(this, 'toggleNote')
   }
 
   componentDidMount() {
     const { dispatch } = this.props
     const actions = bindActionCreators(appActionCreators, dispatch)
     actions.setBpm(90)
+    actions.startTransport()
   }
 
   toggleNote() {
@@ -37,6 +39,7 @@ class App extends Component {
     appStore.synths.map((synth, i) => {
       synthElements.push(
         <ToneSynth
+          name={synth.name}
           id={synth.id}
           instrument={synth.instrument}
           changeSynthValue={(id, property, value) => {
@@ -49,20 +52,11 @@ class App extends Component {
 
     return (
       <div>
-        <div onClick={() => actions.startTransport()}>Start</div>
         <div onClick={() => actions.addSynth()}>Add Synth</div>
         {synthElements}
-        <div onClick={this.toggleNote}>Beep</div>
+        <div onClick={this.toggleNote}>Toggle Note</div>
       </div>
     )
-  }
-}
-
-const mapStateToProps = state => {
-  const { appStore } = state
-
-  return {
-    appStore: appStore
   }
 }
 

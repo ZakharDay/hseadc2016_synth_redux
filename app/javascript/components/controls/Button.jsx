@@ -7,7 +7,7 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const { name, property, option, current, handleClick } = this.props
+    const { id, property, option, current, handleClick } = this.props
 
     const classes = classnames({
       Button: true,
@@ -17,7 +17,7 @@ export default class Button extends React.Component {
     return (
       <div
         className={classes}
-        onClick={() => handleClick(name, property, option)}
+        onClick={() => handleClick(id, property, option)}
       >
         {option}
       </div>
