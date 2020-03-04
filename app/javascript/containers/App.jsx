@@ -8,7 +8,7 @@ import * as appActionCreators from '../actions/appActionCreators'
 import ToneSynth from '../components/synths/ToneSynth'
 
 const select = state => {
-  return { appStore: state }
+  return { store: state.app }
 }
 
 class App extends Component {
@@ -17,26 +17,19 @@ class App extends Component {
     _.bindAll(this, 'toggleNote')
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props
-    const actions = bindActionCreators(appActionCreators, dispatch)
-    actions.setBpm(90)
-    actions.startTransport()
-  }
-
   toggleNote() {
-    const { appStore } = this.props
-    const synth = appStore.synths[0]
+    const { store } = this.props
+    const synth = store.synths[0]
     synth.instrument.triggerAttackRelease('C4', '1n')
   }
 
   render() {
-    const { dispatch, appStore } = this.props
+    const { dispatch, store } = this.props
     const actions = bindActionCreators(appActionCreators, dispatch)
 
     let synthElements = []
 
-    appStore.synths.map((synth, i) => {
+    store.synths.map((synth, i) => {
       synthElements.push(
         <ToneSynth
           name={synth.name}
@@ -52,7 +45,6 @@ class App extends Component {
 
     return (
       <div>
-        <div onClick={() => actions.addSynth()}>Add Synth</div>
         {synthElements}
         <div onClick={this.toggleNote}>Toggle Note</div>
       </div>

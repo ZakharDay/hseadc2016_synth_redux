@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import appStore from '../store/appStore'
 
+import MenubarContainer from '../containers/MenubarContainer'
 import App from '../containers/App'
 
 const store = appStore()
@@ -15,6 +16,7 @@ const store = appStore()
 document.addEventListener('DOMContentLoaded', () => {
   render(
     <Provider store={store}>
+      <MenubarContainer />
       <App />
     </Provider>,
     document.getElementById('root')

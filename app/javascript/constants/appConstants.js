@@ -1,4 +1,2 @@
-export const SET_BPM = 'SET_BPM'
-export const TRANSPORT_START = 'TRANSPORT_START'
-export const ADD_SYNTH = 'ADD_SYNTH'
+export const CREATE_SYNTH = 'CREATE_SYNTH'
 export const CHANGE_SYNTH_VALUE = 'CHANGE_SYNTH_VALUE'
