@@ -4,7 +4,7 @@
   height: 1px;
   margin-bottom: 16px;
   // background: grey;
-  border: 1px solid black;
+  border: 1px solid white;
 
   &:last-child {
     margin-bottom: 0;
@@ -18,7 +18,7 @@
     height: 9px;
     // margin-left: -10px;
     border-radius: 10px;
-    background: black;
+    background: white;
     // transition: all 0.1s ease;
   }
 }
